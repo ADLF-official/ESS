@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiencia Legendaria - ADLF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rojo: #FF2E2E;
+            --negro: #0A0A0A;
+            --degradado-rojo: linear-gradient(135deg, #FF2E2E 0%, #8B0000 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--negro);
+            color: #FFFFFF;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .floating-arrow {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 2s infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(-50%); }
+            50% { transform: translateY(-15px) translateX(-50%); }
+        }
+
+        .hero-section {
+            background: var(--degradado-rojo);
+            padding: 6rem 2rem;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: -5rem;
+        }
+
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-section {
+            padding: 8rem 2rem 4rem;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%23101010"/></svg>');
+        }
+
+        .story-card {
+            background: rgba(20, 20, 20, 0.95);
+            border: 2px solid var(--rojo);
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(255,46,46,0.1);
+        }
+
+        .story-title {
+            font-family: 'Poppins', sans-serif;
+            color: var(--rojo);
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .story-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--rojo);
+        }
+
+        .highlight-text {
+            color: var(--rojo);
+            font-weight: 700;
+            border-bottom: 2px dashed var(--rojo);
+        }
+
+        .cta-section {
+            padding: 4rem 2rem;
+            background: var(--negro);
+        }
+
+        .form-container {
+            background: rgba(30, 30, 30, 0.95);
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid rgba(255,46,46,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,46,46,0.1) 0%, transparent 70%);
+            animation: pulse 6s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+
+        .form-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: rgba(50, 50, 50, 0.5);
+            border: 1px solid rgba(255,46,46,0.3);
+            border-radius: 8px;
+            color: #FFF;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--rojo);
+            box-shadow: 0 0 15px rgba(255,46,46,0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--degradado-rojo);
+            border: none;
+            border-radius: 8px;
+            color: #FFF;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+
+        button:hover::after {
+            left: 100%;
+        }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,46,46,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .story-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-arrow">▼</div>
+
+    <section class="hero-section">
+        <h1 class="hero-title">No vendas servicios<br><span class="highlight-text">Crea Leyendas</span></h1>
+        <p class="hero-subtitle">La diferencia entre un cliente y un fanático está en los detalles que nunca olvidará</p>
+    </section>
+
+    <section class="story-section">
+        <div class="story-card">
+            <h2 class="story-title">El Secreto de los Grandes</h2>
+            <p>Imagina esto: Una clienta entra a tu salón después de recibir un "no" importante en su vida. Mientras trabajas en su look, <span class="highlight-text">no solo transformas su apariencia</span> - creas un ritual donde cada movimiento del peine, cada sugerencia profesional, y cada detalle mínimo le dicen: "Tú vales esto y más".</p>
+            <br>
+            <p>¿Recuerdas la última vez que alguien hizo que te sintieras verdaderamente especial? Esos momentos quedan grabados a fuego. En la belleza, <span class="highlight-text">el producto es efímero</span>, pero la experiencia es eterna. Mientras tus competidores cuentan pelos, tú estás escribiendo historias.</p>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="form-container">
+            <h2 class="form-title">Descarga el <span class="highlight-text">Manifiesto</span></h2>
+            <form id="contactForm">
+                <input type="text" id="nombreSalon" placeholder="Nombre de tu Salón *" required>
+                <input type="text" id="whatsapp" placeholder="Contacto de WhatsApp *" required>
+                <button type="submit">OBTENER EL MANUAL PROHIBIDO</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 ADLF | Transformando Salones en Imperios</p>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombreSalon = document.getElementById('nombreSalon').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
+
+            if(!nombreSalon || !whatsapp) {
+                alert("¡Oh, líder! Necesitamos tus datos para la revolución");
+                return;
+            }
+
+            // Envío a Telegram
+            const botToken = '7609445234:AAHaIOs_atVGpS9dfD5VPpv5ohxW0dduMhQ';
+            const chatId = '929759981';
+            
+            const message = `🩸 Nueva Revolucionaria\n🏰 Salón: ${nombreSalon}\n📱 WhatsApp: ${whatsapp}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatId, text: message })
+            })
+            .then(response => {
+                if(response.ok) {
+                    window.location.href = 'https://drive.google.com/uc?export=download&id=1Sk073p-8w7sAgDjQ1irOs_wSz23-K4qV';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('¡La revolución encontró resistencia! Intenta nuevamente.');
+            });
+        });
+    </script>
+</body>
+</html>
