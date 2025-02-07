@@ -402,6 +402,10 @@
     </footer>
 
     <script>
+        // Configuración del Bot de Telegram
+        const BOT_TOKEN = '7609445234:AAHaIOs_atVGpS9dfD5VPpv5ohxW0dduMhQ';
+        const CHAT_ID = '929759981';
+
         // Carrusel de Fotos
         const carouselInner = document.querySelector('.carousel-inner');
         const indicators = document.querySelectorAll('.carousel-indicators span');
@@ -455,8 +459,8 @@
             });
         });
 
-        // Envío del Formulario
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // Envío del Formulario a Telegram
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const nombreSalon = document.getElementById('nombreSalon').value.trim();
@@ -467,14 +471,42 @@
                 return;
             }
 
-            const form = document.getElementById('contactForm');
-            form.style.opacity = '0';
-            form.style.transition = 'opacity 1s ease';
+            try {
+                // Enviar datos a Telegram
+                const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+                const messageText = `🛎 *Nuevo Lead* 🛎\n\n`
+                    + `*Salón:* ${nombreSalon}\n`
+                    + `*WhatsApp:* ${whatsapp}\n`
+                    + `*Fecha:* ${new Date().toLocaleString()}`;
 
-            setTimeout(() => {
-                alert("¡Gracias por unirte a la comunidad! Redirigiendo...");
-                window.location.href = 'https://drive.google.com/uc?export=download&id=1Sk073p-8w7sAgDjQ1irOs_wSz23-K4qV';
-            }, 1000);
+                const response = await fetch(telegramUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: messageText,
+                        parse_mode: 'Markdown'
+                    })
+                });
+
+                if (!response.ok) throw new Error('Error en el envío');
+
+                // Animación y redirección
+                const form = document.getElementById('contactForm');
+                form.style.opacity = '0';
+                form.style.transition = 'opacity 1s ease';
+
+                setTimeout(() => {
+                    alert("¡Gracias por unirte a la comunidad! Redirigiendo...");
+                    window.location.href = 'https://drive.google.com/uc?export=download&id=1Sk073p-8w7sAgDjQ1irOs_wSz23-K4qV';
+                }, 1000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('🔥 ¡Alerta de Élite! El formulario está en mantenimiento, contáctanos directamente por WhatsApp.');
+            }
         });
     </script>
 </body>
